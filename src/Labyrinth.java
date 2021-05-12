@@ -73,7 +73,7 @@ public final class Labyrinth {
         private FButton[][] buttonGrid;
 
         Layout() {
-            frame = new JFrame();
+            frame = new JFrame("a");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             buttonGrid = new FButton[rows][columns];
             for(int row = 0; row < rows; row++) {
@@ -103,10 +103,11 @@ public final class Labyrinth {
         public void getPath() {
             cum();
             ArrayList<Tuple> temp = null;
-            if(exitPaths.size() > 0) {
+            if(!exitPaths.isEmpty()) {
                 for(ArrayList<Tuple> path : exitPaths) {
                     /* Calculating the shortest path */
                     if(temp == null) temp = path;
+                    // if(path.size() < temp.size()) temp = path;
                     if(path != temp && path.size() == temp.size()) {
                         for(Tuple tuple : path) buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
                         for(Tuple tuple : temp) buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
