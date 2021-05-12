@@ -21,18 +21,5 @@ public final class Main {
         try {labyrinth = new Labyrinth(fileChooser.getSelectedFile());}
         catch(FileNotFoundException e) {e.printStackTrace();}
         Labyrinth.Layout layout = labyrinth.new Layout();
-        /* User input section */
-        /*Scanner input = new Scanner(System.in);
-        System.out.println("Type in coordinates [x] [y] ('q' to quit)");
-        String[] parsedInput = input.nextLine().split(" ");
-        while (!parsedInput[0].equals("q")) {
-            try {
-                int x = Integer.parseInt(parsedInput[0]);
-                int y = Integer.parseInt(parsedInput[1]);
-                labyrinth.findExitFrom(x, y);
-            } catch (NumberFormatException e) {System.out.println("Invalid input!");}         
-            System.out.println("Type in coordinates [x] [y] ('q' to quit)");
-            parsedInput = input.nextLine().split(" ");
-        }*/
     }
 }

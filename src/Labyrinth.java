@@ -53,7 +53,6 @@ public final class Labyrinth {
     public void findExitFrom(int x, int y) {
         exitPaths = new ArrayList<ArrayList<Tuple>>(); // Clear the paths we had saved
         tiles[y][x].findExit();
-
         System.out.println("Paths:");
         /* Lambda functions are fun :) */
         exitPaths.forEach(paths -> {paths.forEach(tuple -> System.out.println(tuple)); System.out.println();});
@@ -62,7 +61,7 @@ public final class Labyrinth {
     public String toString() {
         String temp = "";
         for(int row = 0; row < rows; row++) {
-            for(int column = 0; column < columns; column++) {temp += tiles[row][column].toChar();}
+            for(int column = 0; column < columns; column++) temp += tiles[row][column].toChar();
             if(row != rows - 1) temp += "\n";
         }
         return temp;
@@ -100,6 +99,7 @@ public final class Labyrinth {
         /* Recolors all Paths to white */
         public void cum() {for(int row = 0; row < rows; row++) for(int column = 0; column < columns; column++) if(tiles[row][column] instanceof Path) buttonGrid[row][column].setBackground(Color.WHITE);}
 
+        /* Responsible for drawing the shortest path red */
         public void getPath() {
             cum();
             ArrayList<Tuple> temp = null;
@@ -108,25 +108,11 @@ public final class Labyrinth {
                     /* Calculating the shortest path */
                     if(temp == null) temp = path;
                     if(path != temp && path.size() == temp.size()) {
-                        for(Tuple tuple : path) {
-                            buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
-                        }
-                        for(Tuple tuple : temp) {
-                            buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
-                        }
+                        for(Tuple tuple : path) buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
+                        for(Tuple tuple : temp) buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
                     }
-                    if(path.size() < temp.size() || exitPaths.size() == 1) {
-                        for(Tuple tuple : path) {
-                            buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
-                        }
-                        System.out.println("Path");
-                    }
-                    if(path.size() > temp.size()) {
-                        for(Tuple tuple : temp) {
-                            buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
-                        }
-                        System.out.println("Temp");
-                    }
+                    if(path.size() < temp.size() || exitPaths.size() == 1) for(Tuple tuple : path) buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
+                    if(path.size() > temp.size()) for(Tuple tuple : temp) buttonGrid[tuple.y][tuple.x].setBackground(Color.RED);
                 }
             }
         }
