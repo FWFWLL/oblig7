@@ -103,6 +103,7 @@ public final class Labyrinth {
         public void getPath() {
             cum();
             ArrayList<Tuple> temp = null;
+            /* There exists an elegant and simple version of this, unfortunately thats no fun, so here is this: */
             if(!exitPaths.isEmpty()) {
                 for(ArrayList<Tuple> path : exitPaths) {
                     /* Calculating the shortest path */
